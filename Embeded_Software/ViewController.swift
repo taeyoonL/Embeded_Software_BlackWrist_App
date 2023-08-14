@@ -19,6 +19,9 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
     @IBOutlet var label_5: UILabel!
     
+    @IBOutlet var label_6: UILabel!
+    
+    @IBOutlet var label_7: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,15 +39,12 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     @IBAction func no_slider(_ sender: UISlider) {
         let value = sender.value
         if value == 1 {
-            UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                exit(0)
-            }
+            showDeactivateViewController()
         }
     }
     
     @objc func send_auto_message(){
-        let phone_number = "01082129547"
+        let phone_number = "112"
         let message = "현재 마약에 노출되었습니다. 빨리 와주세요. 현재 저의 위치는 ~~~ 입니다."
         sendTextMessage(to: phone_number, message: message)
     }
@@ -75,5 +75,11 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
             }
         controller.dismiss(animated: true, completion: nil)
     }
+    
+    func showDeactivateViewController() {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let nextViewController = storyboard.instantiateViewController(withIdentifier: "DeactivateViewController") as! DeactivateViewController
+            present(nextViewController, animated: true, completion: nil)
+        }
 }
 
